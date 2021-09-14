@@ -7,4 +7,3 @@ Instructions:
 
 Completed:
 Paul
-Jean
