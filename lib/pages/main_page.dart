@@ -25,7 +25,7 @@ class MainPage extends StatelessWidget {
           calendarFormat: CalendarFormat.month,
       ),
 
-      bottomNavigationBar: NavigationBar(),
+      bottomNavigationBar: NavigationBar(selectedIndex: 2),
       // body: const Align(
       //   alignment: Alignment.bottomCenter,
       //     child: NavigationBar()),
