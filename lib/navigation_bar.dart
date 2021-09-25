@@ -5,52 +5,57 @@ import 'package:real_time_scheduling/pages/main_page.dart';
 import 'package:real_time_scheduling/pages/settings_page.dart';
 
 class NavigationBar extends StatelessWidget {
-  const NavigationBar({Key? key}) : super(key: key);
+
+  final int selectedIndex;
+  const NavigationBar({Key? key, required this.selectedIndex}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Row(
-        children: [
-        Expanded(
-          child: ElevatedButton(
-            child: const Text('My Events',
-            textAlign: TextAlign.center,),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => const EventsPage()));
-            },
-          ),
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.map),
+          label: 'My Events',
         ),
-        Expanded(
-          child: ElevatedButton(
-            child: const Text('My Calendar',
-            textAlign: TextAlign.center,),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => const CalendarPage()));
-            },
-          ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today_outlined),
+          label: 'My Calendar',
         ),
-        Expanded(
-          child: ElevatedButton(
-            child: const Text('Home',
-            textAlign: TextAlign.center,),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => const MainPage()));
-            },
-          ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
         ),
-        Expanded(
-          child: ElevatedButton(
-            child: const Text('Settings',
-            textAlign: TextAlign.center,),
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => const SettingsPage()));
-            },
-          ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.settings),
+          label: 'Settings',
         ),
       ],
+      currentIndex: selectedIndex,
+      unselectedItemColor: Colors.grey,
+      selectedItemColor: Colors.green,
+
+      onTap: (int index){
+        print(index.toString());
+        if(index == 0){
+          Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
+          const EventsPage(),
+            transitionDuration: const Duration(seconds: 0),));
+        }
+        else if(index == 1){
+          Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
+          const CalendarPage(),
+            transitionDuration: const Duration(seconds: 0),));
+        }
+        else if(index == 3){
+          Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
+          const SettingsPage(),
+            transitionDuration: const Duration(seconds: 0),));
+        }
+        else{
+          Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
+          const MainPage(),
+            transitionDuration: const Duration(seconds: 0),));
+        }
+      },
     );
   }
 }

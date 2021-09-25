@@ -17,7 +17,7 @@ class MainPage extends StatelessWidget {
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
       body: const Align(
         alignment: Alignment.bottomCenter,
-          child: NavigationBar()),
+          child: NavigationBar(selectedIndex: 2)),
     );
   }
 }
