@@ -14,10 +14,36 @@ class SettingsPage extends StatelessWidget {
         title: const Text('Settings'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: const Align(
-          alignment: Alignment.bottomCenter,
-          child: NavigationBar()),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
 
+            children: <Widget>[
+              ElevatedButton(onPressed: (){
+              }, child: const Text("Light/Dark Mode")
+              ),
+
+              ElevatedButton(onPressed: (){
+              }, child: const Text("User: John Smith")
+              ),
+
+              ElevatedButton(onPressed: (){
+              }, child: const Text("Location Services")
+              ),
+
+              ElevatedButton(onPressed: (){
+              }, child: const Text("Sign out")
+              ),
+
+              ElevatedButton(onPressed: (){
+              }, child: const Text("Contact us")
+              ),
+            ],
+          ),
+      ),
+      bottomNavigationBar: const NavigationBar(),
+      /** alignment: Alignment.bottomCenter,
+          child: NavigationBar()), **/
     );
   }
 }
