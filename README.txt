@@ -7,4 +7,7 @@ Instructions:
 
 Completed:
 Paul
-Max
+<<<<<<< HEAD
+=======
+Jean
+>>>>>>> develop
