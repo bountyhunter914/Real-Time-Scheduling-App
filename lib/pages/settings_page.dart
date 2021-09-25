@@ -41,7 +41,7 @@ class SettingsPage extends StatelessWidget {
             ],
           ),
       ),
-      bottomNavigationBar: const NavigationBar(),
+      bottomNavigationBar: const NavigationBar(selectedIndex: 3),
       /** alignment: Alignment.bottomCenter,
           child: NavigationBar()), **/
     );
