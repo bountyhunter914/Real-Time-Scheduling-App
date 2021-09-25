@@ -1,6 +1,6 @@
 # Real Time Scheduling Application Research
 
-Research and tools for our application developmetn0
+Research and tools for our application development
 
 ## Development Environment
 - Flutter
