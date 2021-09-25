@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_scheduling/navigation_bar.dart';
+import 'package:real_time_scheduling/components/navigation_bar.dart';
 
 /// Max's Page
 class CalendarPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class CalendarPage extends StatelessWidget {
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
       body: const Align(
           alignment: Alignment.bottomCenter,
-          child: NavigationBar()),
+          child: NavigationBar(selectedIndex: 1)),
     );
   }
 }

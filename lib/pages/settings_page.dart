@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_scheduling/navigation_bar.dart';
+import 'package:real_time_scheduling/components/navigation_bar.dart';
 
 /// Paul's Page
 class SettingsPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class SettingsPage extends StatelessWidget {
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
       body: const Align(
           alignment: Alignment.bottomCenter,
-          child: NavigationBar()),
+          child: NavigationBar(selectedIndex: 3)),
 
     );
   }
