@@ -18,9 +18,9 @@ While Android is in the name, Android Studio can be used to develop for flutter.
 Android Studio has many built in features for app development such as tools to run an image of a phone or using a USB directly test on a physical device. 
 Android Studio is built off of intellij thus, it has built GitHub functionality making git commands incredibly easy.
 ## Libraries
-Sqflite: This library is used to build an SQL Database for applications. This allows devices to save data locally.
-Http: We can use this to issue http request
-Dart Libraries: Dart has many libraries that will be helpful in application development. This is the language Flutter is based on. 
+- Sqflite: This library is used to build an SQL Database for applications. This allows devices to save data locally.
+- Http: We can use this to issue http request
+- Dart Libraries: Dart has many libraries that will be helpful in application development. This is the language Flutter is based on. 
 ## Helpful Resources
 - [DartPad](https://www.dartpad.dev/?): DartPad is an online IDE that can used to practice dart basics
 - [Pub.dev](https://pub.dev/): This is an online website to find packages for Dart and Flutter. 
