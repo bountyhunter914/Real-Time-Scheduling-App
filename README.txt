@@ -7,4 +7,7 @@ Instructions:
 
 Completed:
 Paul
-Preston
+<<<<<<< HEAD
+=======
+Jean
+>>>>>>> develop
