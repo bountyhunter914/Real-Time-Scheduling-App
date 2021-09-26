@@ -22,7 +22,7 @@ class EventsPage extends StatelessWidget {
           icon: const Icon(Icons.add),
           backgroundColor: Colors.blue,
         ),
-      bottomNavigationBar: NavigationBar(selectedIndex: 0,)
+      bottomNavigationBar: const NavigationBar(selectedIndex: 0,)
     );
   }
 }
@@ -36,6 +36,14 @@ class EventsMain extends StatelessWidget{
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: const <Widget>[
+          Text(
+              'Next Upcoming Event: Placeholder Event 1',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  backgroundColor: Colors.white)
+          ),
           Text(
             'Press Dropdown to View Events Today',
             textAlign: TextAlign.center,
