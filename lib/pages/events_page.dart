@@ -37,6 +37,14 @@ class EventsMain extends StatelessWidget{
         mainAxisSize: MainAxisSize.min,
         children: const <Widget>[
           Text(
+              'Next Upcoming Event: Placeholder Event 1',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  backgroundColor: Colors.white)
+          ),
+          Text(
             'Press Dropdown to View Events Today',
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
