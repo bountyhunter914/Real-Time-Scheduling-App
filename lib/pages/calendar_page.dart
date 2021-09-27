@@ -21,5 +21,5 @@ class CalendarPage extends StatelessWidget {
       ),
       bottomNavigationBar: NavigationBar(selectedIndex: 1)
     );
-  }
+  }     
 }
