@@ -5,7 +5,7 @@ import 'package:real_time_scheduling/pages/settings_page.dart';
 import 'package:real_time_scheduling/pages/calendar_page.dart';
 
 void main() => runApp(const MyApp());
-
+//This is a push test
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
