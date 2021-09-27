@@ -10,47 +10,99 @@ class EventsPage extends StatelessWidget {
     return Scaffold(
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
-      backgroundColor: Colors.green,
-      appBar: AppBar(
-        title: const Text('My Events'),
-      ),
-      /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: const EventsMain(),
+      //backgroundColor: Colors.green,
+        appBar: AppBar(
+          title: const Text('My Events'),
+        ),
+        /** Implement your page in body. Just make sure you leave the NavigationBar**/
+        body: EventsMain(),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
-          label: const Text('Create Event'),
-          icon: const Icon(Icons.add),
-          backgroundColor: Colors.blue,
+          label: const Text('Create Event',style: TextStyle(color: Colors.white),),
+          icon: const Icon(Icons.add,color: Colors.white,),
+          backgroundColor: Colors.white10,
         ),
-      bottomNavigationBar: const NavigationBar(selectedIndex: 0,)
+        bottomNavigationBar: const NavigationBar(selectedIndex: 0,)
     );
   }
 }
 
 class EventsMain extends StatelessWidget{
-  const EventsMain({Key? key}) : super(key: key);
+  EventsMain({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: const <Widget>[
-          Text(
-              'Next Upcoming Event: Placeholder Event 1',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  backgroundColor: Colors.white)
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: const [
+                    Text(
+                        'Next Upcoming Event: ',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                          'Placeholder Event 1',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          )
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-          Text(
-            'Press Dropdown to View Events Today',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.circular(10)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: const [
+                    Text(
+                      'Press Dropdown to View Events Today',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    DropDownState()
+                  ],
+                ),
+              ),
+            ),
           ),
-          DropDownState()
+          // const Text(
+          //   'Press Dropdown to View Events Today',
+          //   textAlign: TextAlign.center,
+          //   overflow: TextOverflow.ellipsis,
+          //   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          // ),
+          // const DropDownState()
         ],
       ),
     );
@@ -76,10 +128,10 @@ class DropDown extends State<DropDownState>{
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      style: const TextStyle(color: Colors.blue),
+      style: const TextStyle(color: Colors.white),
       underline: Container(
         height: 2,
-        color: Colors.blueAccent,
+        color: Colors.green,
       ),
       onChanged: (String? newValue){
         setState((){
@@ -99,4 +151,3 @@ class DropDown extends State<DropDownState>{
     );
   }
 }
-
