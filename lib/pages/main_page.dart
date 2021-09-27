@@ -18,17 +18,68 @@ class MainPage extends StatelessWidget {
         title: const Text('Home Page'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: TableCalendar(
-          firstDay: DateTime.utc(1910, 09, 24),
-          lastDay: DateTime.utc(2100,09,24),
-          focusedDay: DateTime.now(),
-          calendarFormat: CalendarFormat.month,
+      body: Column(
+        children: [
+          TableCalendar(
+              firstDay: DateTime.utc(1910, 09, 24),
+              lastDay: DateTime.utc(2100,09,24),
+              focusedDay: DateTime.now(),
+              calendarFormat: CalendarFormat.twoWeeks,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white10,
+                      borderRadius: BorderRadius.circular(16)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: const [
+                          Text("Today's Events"),
+                          Text("Event 1"),
+                          Text("Event 2"),
+                          Text("Event 3"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white10,
+                        borderRadius: BorderRadius.circular(16)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: const [
+                          Text("Event Invites"),
+                          Text("Max's Birthday Party"),
+                          Text("Checkup: Dr. Wildon"),
+                          Text("Family Vacation"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
 
-      bottomNavigationBar: NavigationBar(selectedIndex: 2),
-      // body: const Align(
-      //   alignment: Alignment.bottomCenter,
-      //     child: NavigationBar()),
+      bottomNavigationBar: const NavigationBar(selectedIndex: 2),
     );
   }
 }

@@ -19,7 +19,7 @@ class CalendarPage extends StatelessWidget {
         lastDay: DateTime.utc(2030, 3, 14),
         focusedDay: DateTime.now(),
       ),
-      bottomNavigationBar: NavigationBar(selectedIndex: 1)
+      bottomNavigationBar: const NavigationBar(selectedIndex: 1)
     );
   }     
 }
