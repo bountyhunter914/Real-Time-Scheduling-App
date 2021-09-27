@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/pages/main_page.dart';
 import 'package:real_time_scheduling/pages/events_page.dart';
 import 'package:real_time_scheduling/pages/settings_page.dart';
-import 'package:real_time_scheduling/pages/calendar_page.dart';
+import 'package:real_time_'
+    'scheduling/pages/calendar_page.dart';
 
 void main() => runApp(const MyApp());
-//This is a push test
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-      ),
+      theme: ThemeData.dark().copyWith(),
       initialRoute: '/main',
       routes:
       {
