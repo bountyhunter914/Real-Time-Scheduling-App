@@ -22,7 +22,7 @@ class EventsPage extends StatelessWidget {
           icon: const Icon(Icons.add),
           backgroundColor: Colors.blue,
         ),
-      bottomNavigationBar: NavigationBar(selectedIndex: 0,)
+      bottomNavigationBar: const NavigationBar(selectedIndex: 0,)
     );
   }
 }
