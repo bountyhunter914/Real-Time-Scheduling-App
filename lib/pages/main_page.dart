@@ -41,10 +41,13 @@ class MainPage extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: const [
-                          Text("Today's Events"),
-                          Text("Event 1"),
-                          Text("Event 2"),
-                          Text("Event 3"),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("Today's Events",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                          ),
+                          Text("CSE 442 Demo"),
+                          Text("Anime Monday"),
+                          Text("Gym"),
                         ],
                       ),
                     ),
@@ -63,7 +66,10 @@ class MainPage extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
                         children: const [
-                          Text("Event Invites"),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("Event Invites",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                          ),
                           Text("Max's Birthday Party"),
                           Text("Checkup: Dr. Wildon"),
                           Text("Family Vacation"),
