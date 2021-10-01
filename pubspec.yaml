@@ -31,6 +31,8 @@ dependencies:
     sdk: flutter
     
   table_calendar: ^3.0.2
+  sqflite: ^2.0.0+4
+  path_provider: ^2.0.5
 
 
 

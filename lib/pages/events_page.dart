@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
+import 'package:real_time_scheduling/database.dart';
 
 /// Preston's Page
 class EventsPage extends StatelessWidget {
@@ -29,7 +30,10 @@ class EventsPage extends StatelessWidget {
 
 class EventsMain extends StatelessWidget{
   EventsMain({Key? key}) : super(key: key);
-
+  final controllerTitle = TextEditingController();
+  final controllerDate = TextEditingController();
+  late String title;
+  late String date;
   @override
   Widget build(BuildContext context){
     return Center(
@@ -48,8 +52,39 @@ class EventsMain extends StatelessWidget{
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  children: const [
-                    Text(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextField(
+                          controller: controllerTitle,
+                          decoration: InputDecoration(
+                            labelText: 'Title'
+                          ),
+                          onChanged: (text){title = text;},
+                        ),
+                        TextField(
+                          controller: controllerDate,
+                          decoration: InputDecoration(
+                              labelText: 'Date'
+                          ),
+                          onChanged: (text){date = text;},
+                        ),
+                        ElevatedButton(
+                            onPressed: () async{
+                              if(title != null && date != null){
+                                Entry x = Entry();
+                                x.event = "Event";
+                                x.title = title;
+                                x.date = date;
+                                DatabaseHelper helper = DatabaseHelper.instance;
+                                await helper.insert(x);
+                              }
+                            },
+                            child: Text('Submit'))
+                      ],
+                    ),
+                    const Text(
                         'Next Upcoming Event: ',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
@@ -57,7 +92,7 @@ class EventsMain extends StatelessWidget{
                           color: Colors.white,
                         )
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
                           'Placeholder Event 1',
@@ -151,3 +186,4 @@ class DropDown extends State<DropDownState>{
     );
   }
 }
+
