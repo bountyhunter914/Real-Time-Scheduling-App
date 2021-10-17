@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/pages/calendar_page.dart';
 import 'package:real_time_scheduling/pages/events_page.dart';
+import 'package:real_time_scheduling/pages/events_page.dart';
+import 'package:real_time_scheduling/pages/events_page.dart';
 import 'package:real_time_scheduling/pages/main_page.dart';
 import 'package:real_time_scheduling/pages/settings_page.dart';
 
 class NavigationBar extends StatelessWidget {
-
   final int selectedIndex;
-  const NavigationBar({Key? key, required this.selectedIndex}) : super(key: key);
+  NavigationBar({ @required this.selectedIndex});
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -37,7 +38,7 @@ class NavigationBar extends StatelessWidget {
         print(index.toString());
         if(index == 0){
           Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
-          const EventsPage(),
+           EventsPage(),
             transitionDuration: const Duration(seconds: 0),));
         }
         else if(index == 1){
@@ -47,7 +48,7 @@ class NavigationBar extends StatelessWidget {
         }
         else if(index == 3){
           Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
-          const SettingsPage(),
+            SettingsPage(),
             transitionDuration: const Duration(seconds: 0),));
         }
         else{

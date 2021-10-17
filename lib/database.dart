@@ -13,10 +13,10 @@ const columnDate = 'Date';
 const columnEventTitle = 'Title';
 
 class Entry {
-  late int id;
-  late String event;
-  late String date;
-  late String title;
+  int id;
+  String event;
+  String date;
+  String title;
   Entry();
   Entry.fromMap(Map<String,dynamic> map) {
     id = map[columnID];
@@ -44,7 +44,7 @@ class DatabaseHelper {
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
-  late Database _database;
+  static Database _database;
   Future<Database> get database async {
     if(_database != null) return _database;
     _database = await _initiateDataBase();
@@ -75,11 +75,8 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.insert(tableName, entry.toMap());
   }
-
   Future<List<Map<String,dynamic>>> queryAll() async {
     Database db = await instance.database;
     return db.query(tableName);
   }
-
-
 }

@@ -3,7 +3,7 @@ import 'package:real_time_scheduling/navigation_bar.dart';
 
 /// Preston's Page
 class EventsPage extends StatelessWidget {
-  const EventsPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class EventsPage extends StatelessWidget {
        * It is just to help understand which page you are on while implementing your page**/
       //backgroundColor: Colors.green,
       appBar: AppBar(
-        title: const Text('My Events'),
+        title: Text('My Events'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
       body: EventsMain(),
@@ -22,14 +22,13 @@ class EventsPage extends StatelessWidget {
           icon: const Icon(Icons.add,color: Colors.white,),
           backgroundColor: Colors.white10,
         ),
-      bottomNavigationBar: const NavigationBar(selectedIndex: 0,)
+      bottomNavigationBar: NavigationBar(selectedIndex: 0,)
     );
   }
 }
 
 class EventsMain extends StatelessWidget{
-  EventsMain({Key? key}) : super(key: key);
-
+  EventsMain();
   @override
   Widget build(BuildContext context){
     return Center(
@@ -111,7 +110,7 @@ class EventsMain extends StatelessWidget{
 
 //sets up Stateful Widget for Dropdown bar on Events Page
 class DropDownState extends StatefulWidget{
-  const DropDownState({Key? key}) : super(key: key);
+  const DropDownState();
 
   @override
   State<DropDownState> createState() => DropDown();
@@ -133,9 +132,9 @@ class DropDown extends State<DropDownState>{
         height: 2,
         color: Colors.green,
       ),
-      onChanged: (String? newValue){
+      onChanged: (String newValue){
         setState((){
-          mainEvent = newValue!;
+          mainEvent = newValue;
         });
       },
       //add implementation from '+' button
