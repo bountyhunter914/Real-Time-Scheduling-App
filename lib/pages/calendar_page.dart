@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'event_adder.dart';
 
 /// Max's Page
 class CalendarPage extends StatelessWidget {
@@ -14,9 +15,7 @@ class CalendarPage extends StatelessWidget {
         title: const Text('My Calendar'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: Column(
-
-      ),
+      body: EventAdder(),
       bottomNavigationBar: NavigationBar(selectedIndex: 1)
     );
   }     
