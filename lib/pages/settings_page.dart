@@ -3,7 +3,7 @@ import 'package:real_time_scheduling/navigation_bar.dart';
 
 /// Paul's Page
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +31,6 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -86,7 +85,7 @@ class SettingsPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const NavigationBar(selectedIndex: 3),
+      bottomNavigationBar: NavigationBar(selectedIndex: 3),
       /** alignment: Alignment.bottomCenter,
           child: NavigationBar()), **/
     );

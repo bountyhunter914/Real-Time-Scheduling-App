@@ -6,10 +6,10 @@ import 'package:table_calendar/table_calendar.dart';
 /// Swati's Page
 class MainPage extends StatelessWidget {
 
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage();
   @override
   Widget build(BuildContext context) {
-    DateTime? select;
+    DateTime select;
     return Scaffold(
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
@@ -19,12 +19,12 @@ class MainPage extends StatelessWidget {
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
       body: Column(
         children: [
-          TableCalendar(
-            firstDay: DateTime.utc(1910, 09, 24),
-            lastDay: DateTime.utc(2100,09,24),
-            focusedDay: DateTime.now(),
-            calendarFormat: CalendarFormat.twoWeeks,
-          ),
+          // TableCalendar(
+          //   // firstDay: DateTime.utc(1910, 09, 24),
+          //   // lastDay: DateTime.utc(2100,09,24),
+          //   // focusedDay: DateTime.now(),
+          //   // calendarFormat: CalendarFormat.twoWeeks,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
 
@@ -84,7 +84,7 @@ class MainPage extends StatelessWidget {
         ],
       ),
 
-      bottomNavigationBar: const NavigationBar(selectedIndex: 2),
+      bottomNavigationBar: NavigationBar(selectedIndex: 2),
     );
   }
 }
