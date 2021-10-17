@@ -32,6 +32,8 @@ dependencies:
   table_calendar: ^2.3.3
   sqflite: ^1.0.0
   path_provider: ^0.4.1
+  provider:
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:
