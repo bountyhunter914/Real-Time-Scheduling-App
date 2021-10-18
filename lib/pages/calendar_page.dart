@@ -4,7 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 /// Max's Page
 class CalendarPage extends StatelessWidget {
-  const CalendarPage({Key? key}) : super(key: key);
+  const CalendarPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,10 +14,8 @@ class CalendarPage extends StatelessWidget {
         title: const Text('My Calendar'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: TableCalendar(
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
-        focusedDay: DateTime.now(),
+      body: Column(
+
       ),
       bottomNavigationBar: NavigationBar(selectedIndex: 1)
     );
