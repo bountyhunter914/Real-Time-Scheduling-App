@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       {
         '/main' : (context) => const MainPage(),
         '/events' : (context) =>  EventsPage(),
-        '/settings' : (context) => const SettingsPage(),
+        '/settings' : (context) => SettingsPage(),
         '/calendar' : (context) => const CalendarPage(),
       },
     );

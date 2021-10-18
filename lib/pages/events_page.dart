@@ -18,9 +18,8 @@ class EventsPage extends StatelessWidget {
       body: EventsMain(),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
-          label: const Text('Create Event',style: TextStyle(color: Colors.white),),
-          icon: const Icon(Icons.add,color: Colors.white,),
-          backgroundColor: Colors.white10,
+          label: const Text('Create Event'),
+          icon: const Icon(Icons.add),
         ),
       bottomNavigationBar: NavigationBar(selectedIndex: 0,)
     );
@@ -52,8 +51,7 @@ class EventsMain extends StatelessWidget{
                         'Next Upcoming Event: ',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        style: TextStyle(fontWeight: FontWeight.bold
                             )
                     ),
                     Padding(
@@ -87,7 +85,7 @@ class EventsMain extends StatelessWidget{
                       'Press Dropdown to View Events Today',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     DropDownState()
                   ],
@@ -127,7 +125,7 @@ class DropDown extends State<DropDownState>{
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      style: const TextStyle(color: Colors.white),
+      //style: const TextStyle(color: Colors.white),
       underline: Container(
         height: 2,
         color: Colors.green,
