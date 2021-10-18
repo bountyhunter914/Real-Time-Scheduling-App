@@ -13,6 +13,7 @@ class _EventAdderState extends State<EventAdder> {
   final controller_date = TextEditingController();
   String title;
   String date;
+  List<String> Events;
   List<Map<String,dynamic>> data;
   bool ready = false;
 
