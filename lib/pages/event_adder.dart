@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/database.dart';
 
-
+//Used to test database
 class EventAdder extends StatefulWidget {
   const EventAdder();
   @override
