@@ -122,6 +122,8 @@ class _EventAdderState extends State<EventAdder>{
     return Column(
         children: <Widget>[
           DropDownState(this.eventsList),
+          //DatePicker code found in https://codesinsider.com/flutter-
+          // datepicker-widget-example-tutorial/
           ElevatedButton(
               onPressed: (){
                 _selectDate(context);
