@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:real_time_scheduling/ThemeModel.dart';
 import 'package:provider/provider.dart';
+import 'package:real_time_scheduling/pages/contact_us.dart';
 import 'package:real_time_scheduling/pages/settings_builder.dart';
 
 /// Paul's Page
@@ -21,6 +22,9 @@ class _SettingsPageState extends State<SettingsPage>{
           title:"Settings",
           theme: themeModel.isDark ? ThemeData.dark() : ThemeData.light(),
           home: SettingsBuilder(),
+          routes:{
+            '/contact' : (context) => const ContactUs()
+          },
         );
       })
     );

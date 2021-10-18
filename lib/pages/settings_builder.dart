@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:real_time_scheduling/ThemeModel.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
+import 'package:real_time_scheduling/pages/contact_us.dart';
 
 class SettingsBuilder extends StatefulWidget{
   @override
@@ -84,15 +85,13 @@ class _SettingsBuilderState extends State{
   GestureDetector buildAccountOption(BuildContext context, String title){
     return GestureDetector(
       onTap: (){
-        showDialog(context: context, builder: (BuildContext context){
+        if(title != "Contact Us")
+          showDialog(context: context, builder: (BuildContext context){
           return AlertDialog(
             title: Text(title),
             content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children:[
-                  if(title == "Contact Us")
-                    Text("Have a problem? Email us at SluggishSchedulers@gmail.com and we'll get back to you!"),
-                  if(title != "Contact Us")
                   Text("Under Construction")
                 ]
             ),
@@ -101,6 +100,7 @@ class _SettingsBuilderState extends State{
             ],
           );
         });
+        Navigator.pushNamed(context, "/contact");
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
