@@ -35,7 +35,7 @@ class EventsMain extends StatelessWidget{
             padding: const EdgeInsets.all(16.0),
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.white10,
+                  //color: Colors.white10,
                   borderRadius: BorderRadius.circular(10)
               ),
               child: Padding(
@@ -47,7 +47,7 @@ class EventsMain extends StatelessWidget{
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          //color: Colors.white,
                         )
                     ),
                   ],
@@ -70,7 +70,7 @@ class EventsMain extends StatelessWidget{
                       'Press Dropdown to View Events Today',
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     EventAdder(),
                   ],
@@ -190,7 +190,7 @@ class DropDown extends State<DropDownState>{
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      style: const TextStyle(color: Colors.white),
+      //style: const TextStyle(color: Colors.white),
       underline: Container(
         height: 2,
         color: Colors.green,
