@@ -3,54 +3,103 @@ import 'package:real_time_scheduling/navigation_bar.dart';
 
 /// Preston's Page
 class EventsPage extends StatelessWidget {
-  const EventsPage({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
-      backgroundColor: Colors.green,
+      //backgroundColor: Colors.green,
       appBar: AppBar(
-        title: const Text('My Events'),
+        title: Text('My Events'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: const EventsMain(),
+      body: EventsMain(),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
           label: const Text('Create Event'),
           icon: const Icon(Icons.add),
-          backgroundColor: Colors.blue,
         ),
-      bottomNavigationBar: const NavigationBar(selectedIndex: 0,)
+      bottomNavigationBar: NavigationBar(selectedIndex: 0,)
     );
   }
 }
 
 class EventsMain extends StatelessWidget{
-  const EventsMain({Key? key}) : super(key: key);
-
+  EventsMain();
   @override
   Widget build(BuildContext context){
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: const <Widget>[
-          Text(
-              'Next Upcoming Event: Placeholder Event 1',
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  backgroundColor: Colors.white)
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: const [
+                    Text(
+                        'Next Upcoming Event: ',
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontWeight: FontWeight.bold
+                            )
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                          'Placeholder Event 1',
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontWeight: FontWeight.bold,
+                            color: Colors.green,
+                          )
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-          Text(
-            'Press Dropdown to View Events Today',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white10,
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: const [
+                    Text(
+                      'Press Dropdown to View Events Today',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    DropDownState()
+                  ],
+                ),
+              ),
+            ),
           ),
-          DropDownState()
+          // const Text(
+          //   'Press Dropdown to View Events Today',
+          //   textAlign: TextAlign.center,
+          //   overflow: TextOverflow.ellipsis,
+          //   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          // ),
+          // const DropDownState()
         ],
       ),
     );
@@ -59,7 +108,7 @@ class EventsMain extends StatelessWidget{
 
 //sets up Stateful Widget for Dropdown bar on Events Page
 class DropDownState extends StatefulWidget{
-  const DropDownState({Key? key}) : super(key: key);
+  const DropDownState();
 
   @override
   State<DropDownState> createState() => DropDown();
@@ -76,14 +125,14 @@ class DropDown extends State<DropDownState>{
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,
-      style: const TextStyle(color: Colors.blue),
+      //style: const TextStyle(color: Colors.white),
       underline: Container(
         height: 2,
-        color: Colors.blueAccent,
+        color: Colors.green,
       ),
-      onChanged: (String? newValue){
+      onChanged: (String newValue){
         setState((){
-          mainEvent = newValue!;
+          mainEvent = newValue;
         });
       },
       //add implementation from '+' button

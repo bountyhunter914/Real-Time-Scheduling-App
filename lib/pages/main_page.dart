@@ -4,13 +4,12 @@ import 'package:table_calendar/table_calendar.dart';
 
 
 /// Swati's Page
-
 class MainPage extends StatelessWidget {
 
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage();
   @override
   Widget build(BuildContext context) {
-    DateTime? select;
+    DateTime select;
     return Scaffold(
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
@@ -18,17 +17,74 @@ class MainPage extends StatelessWidget {
         title: const Text('Home Page'),
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      body: TableCalendar(
-          firstDay: DateTime.utc(1910, 09, 24),
-          lastDay: DateTime.utc(2100,09,24),
-          focusedDay: DateTime.now(),
-          calendarFormat: CalendarFormat.month,
+      body: Column(
+        children: [
+          // TableCalendar(
+          //   // firstDay: DateTime.utc(1910, 09, 24),
+          //   // lastDay: DateTime.utc(2100,09,24),
+          //   // focusedDay: DateTime.now(),
+          //   // calendarFormat: CalendarFormat.twoWeeks,
+          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white10,
+                        borderRadius: BorderRadius.circular(16)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("Today's Events",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                          ),
+                          Text("CSE 442 Demo"),
+                          Text("Anime Monday"),
+                          Text("Gym"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white10,
+                        borderRadius: BorderRadius.circular(16)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("Event Invites",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                          ),
+                          Text("Max's Birthday Party"),
+                          Text("Checkup: Dr. Wildon"),
+                          Text("Family Vacation"),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
       ),
 
       bottomNavigationBar: NavigationBar(selectedIndex: 2),
-      // body: const Align(
-      //   alignment: Alignment.bottomCenter,
-      //     child: NavigationBar()),
     );
   }
 }

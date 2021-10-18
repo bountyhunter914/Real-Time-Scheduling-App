@@ -8,18 +8,17 @@ import 'package:real_time_'
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-      ),
+      theme: ThemeData.dark().copyWith(),
       initialRoute: '/main',
       routes:
       {
         '/main' : (context) => const MainPage(),
-        '/events' : (context) => const EventsPage(),
-        '/settings' : (context) => const SettingsPage(),
+        '/events' : (context) =>  EventsPage(),
+        '/settings' : (context) => SettingsPage(),
         '/calendar' : (context) => const CalendarPage(),
       },
     );
