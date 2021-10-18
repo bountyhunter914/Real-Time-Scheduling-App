@@ -5,6 +5,8 @@ import 'package:real_time_scheduling/pages/events_page.dart';
 //import 'package:real_time_scheduling/event.dart';
 
 /// Swati's Page
+///
+/*
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class MainPage extends StatelessWidget {
     );
   }
 }
-
+*/
 class MainPageStateful extends StatefulWidget {
   @override
   State<MainPageStateful> createState() => _MainPageStatefulWidget();
