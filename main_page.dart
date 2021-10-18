@@ -174,7 +174,7 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
       //   )
       // ],
 
-      //bottomNavigationBar: NavigationBar(selectedIndex: 2),
+      bottomNavigationBar: NavigationBar(selectedIndex: 2),
     );
   }
 
