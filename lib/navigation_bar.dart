@@ -53,7 +53,7 @@ class NavigationBar extends StatelessWidget {
         }
         else{
           Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
-          const MainPage(),
+          MainPageStateful(),
             transitionDuration: const Duration(seconds: 0),));
         }
       },
