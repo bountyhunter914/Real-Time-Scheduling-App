@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:real_time_scheduling/pages/events_page.dart';
-import 'package:real_time_scheduling/event.dart';
+//import 'package:real_time_scheduling/event.dart';
 
 /// Swati's Page
 class MainPage extends StatelessWidget {
