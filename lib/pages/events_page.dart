@@ -114,7 +114,7 @@ class _EventAdderState extends State<EventAdder>{
     super.dispose();
     controller.dispose();
   }
-
+  //adds events w database
   void addEvent(entry) async{//addEvent(text) {
     //Event e = Event(text, this.selectedDate);
     //eventsList.add(e);
