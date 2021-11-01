@@ -12,7 +12,6 @@ class SettingsPage extends StatefulWidget{
   _SettingsPageState createState() => _SettingsPageState();
 }
 class _SettingsPageState extends State<SettingsPage>{
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

@@ -1,6 +1,9 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:real_time_scheduling/event.dart';
+import 'package:real_time_scheduling/databaseV2.dart';
 /// Preston's Page
 ///
 ///
@@ -100,28 +103,48 @@ class EventAdder extends StatefulWidget{
 class _EventAdderState extends State<EventAdder>{
   final controller = TextEditingController();
   List<Event> eventsList = [];
+  List<Map<String,dynamic>> events;
   DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
+  List<EventEntry> eventInstances = [];
+
 
   @override
   void dispose(){
     super.dispose();
     controller.dispose();
   }
-
-  List<Event> retEventList(){
-    return this.eventsList;
+  //adds events w database
+  void addEvent(entry) async{//addEvent(text) {
+    //Event e = Event(text, this.selectedDate);
+    //eventsList.add(e);
+    DatabaseHelper helper = DatabaseHelper.instance;
+    EventEntry inserted = new EventEntry();
+    inserted.day = this.selectedDate.day;
+    inserted.month = this.selectedDate.month;
+    inserted.year = this.selectedDate.year;
+    inserted.hour = this.selectedTime.hour;
+    inserted.minute = this.selectedTime.minute;
+    inserted.title = entry;
+    await helper.event_insert(inserted);
+    print(inserted.title);
+    controller.clear();
   }
 
-  void addEvent(text) {
-    Event e = Event(text, this.selectedDate);
-    eventsList.add(e);
-  }
-
+  // void getEvents () async{
+  //     DatabaseHelper helper = DatabaseHelper.instance;
+  //     events = await helper.queryEvents();
+  //     for(var i in events){
+  //       EventEntry event = new EventEntry.fromMap(i);
+  //       eventInstances.add(event);
+  //     }
+  //     print("Got Events maybe???");
+  // }
   @override
   Widget build(BuildContext context){
     return Column(
         children: <Widget>[
-          DropDownState(this.eventsList),
+          DropDownState(),
           //DatePicker code found in https://codesinsider.com/flutter-
           // datepicker-widget-example-tutorial/
           ElevatedButton(
@@ -131,8 +154,14 @@ class _EventAdderState extends State<EventAdder>{
               child: Text('Choose Date')
           ),
           Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+          ElevatedButton(onPressed: (){
+            _selectTime(context);
+            },
+              child: Text('Choose Time')
+          ),
           TextField(
             controller: this.controller,
+            maxLength: 15,
             decoration: InputDecoration(labelText: "Add Event Name:"),
             onSubmitted: (text) => this.addEvent(text),
           ),
@@ -152,39 +181,53 @@ class _EventAdderState extends State<EventAdder>{
         selectedDate = selected;
       });
   }
+
+  _selectTime(BuildContext context) async{
+    final TimeOfDay time = await showTimePicker(
+        context: context,
+        initialTime: selectedTime);
+        if(time != null)
+          setState(() {
+            selectedTime = time;
+          });
+  }
 }
 
 //sets up Stateful Widget for Dropdown bar on Events Page
 class DropDownState extends StatefulWidget{
-  final List<Event> events;
-  DropDownState(this.events);
   @override
-  State<DropDownState> createState() => DropDown(events);
+  State<DropDownState> createState() => DropDown();
 }
 
 //implementation of Dropdown Button from Flutter API
 class DropDown extends State<DropDownState>{
-  List<Event> events;
   List<String> eventNames = [];
-
   String mainEvent = '';
 
-  DropDown(this.events);
+  void getEvents() async{
+    DatabaseHelper helper = DatabaseHelper.instance;
+    List<Map<String, dynamic>>data = await helper.queryEvents();
+    for(var i in data){
+      if(i['Day'].toString() == DateTime.now().day.toString() &&
+          i['Month'].toString() == DateTime.now().month.toString()){
+        if(!eventNames.contains(i['Title'])) {
+          eventNames.add(i['Title']);
+        }
+      }
+    }
+    print("Got Events maybe???");
+  }
   @override
   Widget build(BuildContext context){
-    if(widget.events.isEmpty){
-      mainEvent = 'Add Event';
+    getEvents();
+    if(eventNames.length == 0){
+      mainEvent = 'View Event';
       eventNames = [mainEvent];
     }
     else{
-      eventNames = [];
-      for (Event e in widget.events){
-        eventNames.add(e.name);
-      }
       mainEvent = eventNames[0];
     }
     //checks length of eventsList
-    print(events.length);
     return DropdownButton<String>(
       value: mainEvent,
       icon: const Icon(Icons.arrow_downward),

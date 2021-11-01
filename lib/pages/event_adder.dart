@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_scheduling/database.dart';
+import 'package:real_time_scheduling/databaseV2.dart';
 
 //Used to test database
 class EventAdder extends StatefulWidget {
@@ -48,22 +48,30 @@ class _EventAdderState extends State<EventAdder> {
           ),
         ),
         RaisedButton(onPressed: ()async {
-          if(title != null && date != null){
-            Entry event = Entry();
-            event.date = date;
-            event.title = title;
-            event.event = "Events";
-            DatabaseHelper helper = DatabaseHelper.instance;
-            await helper.insert(event);
-            print('inserted row');
-          }
-          data = await DatabaseHelper.instance.queryAll();
+          EventEntry event = EventEntry();
+          event.title = "Test";
+          event.year = 2021;
+          event.month = 10;
+          event.day = 28;
+          event.minute = 30;
+          event.hour = 10;
+          DatabaseHelper helper = DatabaseHelper.instance;
+          await helper.event_insert(event);
+          print('inserted row');
+          data = await DatabaseHelper.instance.queryEvents();
           for(var i in data){
             print(i);
           }
-          setState(() {
-            ready = true;
-          });
+          SettingEntry set = SettingEntry();
+          set.username = 'bountyhunter914';
+          set.offline = 'FALSE';
+          set.theme = 'TRUE';
+          set.name = 'Jean';
+          await helper.setting_insert(set);
+          data = await helper.querySettings();
+          for(var i in data){
+            print(i);
+          }
         },
           child: Text('Submit'),
         ),
