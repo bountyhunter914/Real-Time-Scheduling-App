@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         '/main' : (context) => MainPageStateful(),
         '/events' : (context) =>  EventsPage(),
         '/settings' : (context) => SettingsPage(),
-        '/calendar' : (context) => const CalendarPage(),
+        '/calendar' : (context) => CalendarPage(),
       },
     );
   }
