@@ -7,7 +7,8 @@ import 'package:real_time_scheduling/databaseV2.dart';
 import 'event_adder.dart';
 
 
-class EventsPage extends StatelessWidget {
+class EventsPageV2 extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,16 +25,18 @@ class EventsPage extends StatelessWidget {
   }
 }
 
+
+
 class EventsMainV2 extends StatefulWidget{
-
   EventsMainV2();
-
   @override
   _EventsMainV2State createState() => _EventsMainV2State();
+
 }
 
 class _EventsMainV2State extends State<EventsMainV2> {
   DateTime date;
+  bool ready = false;
   final controller_title = TextEditingController();
   String title;
   List<List<String>> events;
@@ -75,6 +78,7 @@ class _EventsMainV2State extends State<EventsMainV2> {
                 ),
                 onChanged: (dt) {
                   setState(() => date = dt);
+                  start();
                   print(date);
                 },
               ),
@@ -82,35 +86,39 @@ class _EventsMainV2State extends State<EventsMainV2> {
           ),
           ElevatedButton(
               onPressed: () {
+                start();
                 if (date != null) {
                   input_date_to_entry(date);
+                  title = "";
+                  date = null;
                 }
               },
               child: Text("Submit")),
-          if(events != null) showEvents(events),
+          if(ready) showEvents(),
         ],
       ),
     );
   }
 
 
-   input_date_to_entry(DateTime date) {
+   input_date_to_entry(DateTime date) async {
     EventEntry event = EventEntry();
     event.month = date.month;
     event.year = date.year;
+    event.day = date.day;
     event.minute = date.minute;
     event.hour = date.hour;
     event.title = title;
     DatabaseHelper helper = DatabaseHelper.instance;
-    helper.event_insert(event);
+    await helper.event_insert(event);
   }
 
-  Column showEvents(List<List<String>> data){
+  Column showEvents(){
     print("ShowEvents Called");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        for(var i in data) Text(i[0] + " Year: " +i[1] + " Month: " + i[2] + " Day: " + i[3] + " Time: " + i[4] + ":" + i[5])
+       if(this.events != null) for(var i in this.events) Text(i[0] + " Year: " +i[1] + " Month: " + i[2] + " Day: " + i[3] + " Time: " + i[4] + ":" + i[5])
       ],
     );
 
@@ -124,13 +132,18 @@ class _EventsMainV2State extends State<EventsMainV2> {
     for(var i in data){
       sortedData.add([i['Title'],i['Year'].toString(), i['Month'].toString(),i['Day'].toString(), i['Hour'].toString(),i['Minute'].toString()]);
     }
+    print(sortedData);
     return sortedData;
   }
 
    start() async{
     DatabaseHelper helper = DatabaseHelper.instance;
     List<Map<String,dynamic>> data = await helper.queryEvents();
-    events = sortData(data);
+    this.events = sortData(data);
+    setState(() {
+      ready = true;
+    });
+    print(events);
   }
 
   
