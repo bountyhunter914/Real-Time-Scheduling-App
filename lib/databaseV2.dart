@@ -160,6 +160,7 @@ class DatabaseHelper {
     Database db = await instance.database;
     return db.query(tableSetting);
   }
+
   //EventInsert
   //SettingInsert
   //RemoveEvents

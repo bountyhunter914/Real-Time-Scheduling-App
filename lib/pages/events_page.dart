@@ -1,5 +1,7 @@
 //import 'dart:html';
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:real_time_scheduling/event.dart';
@@ -35,52 +37,34 @@ class EventsMain extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(5.0),
             child: Container(
               decoration: BoxDecoration(
                   //color: Colors.white10,
-                  borderRadius: BorderRadius.circular(10)
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: const [
-                    Text(
-                        'Next Upcoming Event shown in dropdown',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.bold,
-                          //color: Colors.white,
-                        )
-                    ),
-                  ],
-                ),
+                  borderRadius: BorderRadius.circular(20)
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(5.0),
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.white10,
                   borderRadius: BorderRadius.circular(10)
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.only(top:120, bottom: 120),
                 child: Column(
                   children: [
-                    Text(
-                      'Press Dropdown to View Events Today',
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
                     EventAdder(),
                   ],
                 ),
               ),
             ),
           ),
+          Center(
+            child: DropDownState()
+          )
           // const Text(
           //   'Press Dropdown to View Events Today',
           //   textAlign: TextAlign.center,
@@ -144,7 +128,6 @@ class _EventAdderState extends State<EventAdder>{
   Widget build(BuildContext context){
     return Column(
         children: <Widget>[
-          DropDownState(),
           //DatePicker code found in https://codesinsider.com/flutter-
           // datepicker-widget-example-tutorial/
           ElevatedButton(
@@ -152,8 +135,8 @@ class _EventAdderState extends State<EventAdder>{
                 _selectDate(context);
               },
               child: Text('Choose Date')
-          ),
-          Text("${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+            ),
+          Text("${selectedDate.month}/${selectedDate.day}/${selectedDate.year}"),
           ElevatedButton(onPressed: (){
             _selectTime(context);
             },
@@ -215,13 +198,12 @@ class DropDown extends State<DropDownState>{
         }
       }
     }
-    print("Got Events maybe???");
   }
   @override
   Widget build(BuildContext context){
     getEvents();
     if(eventNames.length == 0){
-      mainEvent = 'View Event';
+      mainEvent = 'View Event(s)';
       eventNames = [mainEvent];
     }
     else{
@@ -229,6 +211,7 @@ class DropDown extends State<DropDownState>{
     }
     //checks length of eventsList
     return DropdownButton<String>(
+
       value: mainEvent,
       icon: const Icon(Icons.arrow_downward),
       iconSize: 24,
@@ -247,10 +230,13 @@ class DropDown extends State<DropDownState>{
       items: eventNames.map<DropdownMenuItem<String>>((String value){
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+
+          child: Text(value)
         );
       }).toList(),
     );
   }
 }
+
+
 
