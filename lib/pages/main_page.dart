@@ -74,35 +74,35 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
               ),
               ListTile(
                   title: Text("STA 301 Recitation"),
-                  textColor: Colors.red,
+                  // textColor: Colors.red,
                   focusColor: Colors.transparent,
                   onTap: () {
                     Navigator.pop(context);
                   }),
               ListTile(
                   title: Text("CSE 442 Tuesday Meeting"),
-                  textColor: Colors.red,
+                  // textColor: Colors.red,
                   focusColor: Colors.transparent,
                   onTap: () {
                     Navigator.pop(context);
                   }),
               ListTile(
                   title: Text("X's Birthday Party"),
-                  textColor: Colors.red,
+                  // textColor: Colors.red,
                   focusColor: Colors.transparent,
                   onTap: () {
                     Navigator.pop(context);
                   }),
               ListTile(
                   title: Text("CSE 250 lecture"),
-                  textColor: Colors.red,
+                  // textColor: Colors.red,
                   focusColor: Colors.transparent,
                   onTap: () {
                     Navigator.pop(context);
                   }),
               ListTile(
                 title: Text("Dinner at Y's"),
-                textColor: Colors.red,
+                // textColor: Colors.red,
                 focusColor: Colors.transparent,
                 onTap: () {
                   Navigator.pop(context);

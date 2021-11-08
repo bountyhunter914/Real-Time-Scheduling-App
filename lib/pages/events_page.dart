@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:real_time_scheduling/event.dart';
 import 'package:real_time_scheduling/databaseV2.dart';
+import 'test_events_page.dart';
 /// Preston's Page
 ///
 ///
@@ -20,7 +21,7 @@ class EventsPage extends StatelessWidget {
           title: Text('My Events'),
         ),
         /** Implement your page in body. Just make sure you leave the NavigationBar**/
-        body: EventsMain(),
+        body: EventsMainV2(),
         bottomNavigationBar: NavigationBar(selectedIndex: 0,)
     );
   }
@@ -62,9 +63,9 @@ class EventsMain extends StatelessWidget{
               ),
             ),
           ),
-          Center(
-            child: DropDownState()
-          )
+          // Center(
+          //   child: DropDownState()
+          // )
           // const Text(
           //   'Press Dropdown to View Events Today',
           //   textAlign: TextAlign.center,
