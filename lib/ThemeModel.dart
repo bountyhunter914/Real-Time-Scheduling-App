@@ -1,22 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:real_time_scheduling/theme_shared_preferences.dart';
+import 'databaseV2.dart';
 
 class ThemeModel extends ChangeNotifier{
-  bool _isDark;
+  bool _isDark = false;
+  String theme;
   ThemeSharedPreferences themeSharedPreferences;
   bool get isDark => _isDark;
 
   ThemeModel(){
     //calls getThemedb, will add theme if not set
     getThemedb();
-    DatabaseHelper helper = DatabaseHelper.instance;
-    List<Map<String, dynamic>>data = await helper.querySettings();
-    for(var i in data){
-      if(i["theme"].toString() == "false"){
-        _isDark = false;
-      }else if(i["theme"].toString() == "true"){
-        _isDark = true;
-      }
+    if(theme != null){
+      if(theme == "false")  _isDark = false;
+      else _isDark = true;
     }
 
     themeSharedPreferences = ThemeSharedPreferences();
@@ -27,14 +24,24 @@ class ThemeModel extends ChangeNotifier{
     _isDark = value;
     themeSharedPreferences.setTheme(value);
     notifyListeners();
+    if(theme == 'false'){
+      if(_isDark != false){
+        insertThemedb("true");
+      }
+    }
+    if(theme == 'true'){
+      if(_isDark != true){
+        insertThemedb("false");
+      }
+    }
   }
 
   //inserts theme string to db if not initialized
-  insertThemedb() async{
+  insertThemedb(theme_value) async{
     DatabaseHelper helper = DatabaseHelper.instance;
     SettingEntry setting = new SettingEntry();
-    setting.theme = "false";
-    await helper.event_insert(setting);
+    setting.theme = theme_value;
+    helper.setting_insert(setting);
 
   }
 
@@ -42,10 +49,8 @@ class ThemeModel extends ChangeNotifier{
   getThemedb() async{
     DatabaseHelper helper = DatabaseHelper.instance;
     List<Map<String, dynamic>>data = await helper.querySettings();
-    for(var i in data){
-      if(i["theme"].toString() == ""){
-        insertThemedb();
-      }
+    if (data != null){
+        theme = data[0]['Theme'];
     }
   }
 
