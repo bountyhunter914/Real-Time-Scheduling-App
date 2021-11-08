@@ -7,6 +7,11 @@ class ThemeModel extends ChangeNotifier{
   bool get isDark => _isDark;
 
   ThemeModel(){
+    //Inserts database
+    DatabaseHelper helper = DatabaseHelper.instance;
+    SettingEntry setting = new SettingEntry();
+    setting.theme = "false";
+    await helper.event_insert(setting);
     _isDark = false;
     themeSharedPreferences = ThemeSharedPreferences();
     getThemePreferences();
