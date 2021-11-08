@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'event_adder.dart';
+import 'package:real_time_scheduling/databaseV2.dart';
 
 /// Max's Page
 class CalendarPage extends StatefulWidget {
@@ -104,10 +104,20 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
                   if (eventController.text.isEmpty) {
                     return;
                   }
-                  setState(() {
+                  setState(() async {
                     if (_events[_calendarController.selectedDay] != null) {
                       _events[_calendarController.selectedDay]
                           .add(eventController.text);
+                      DatabaseHelper helper = DatabaseHelper.instance;
+                      EventEntry inserted = new EventEntry();
+                      inserted.day = _calendarController.selectedDay.day;
+                      inserted.month = _calendarController.selectedDay.month;
+                      inserted.year = _calendarController.selectedDay.year;
+                      inserted.hour = _calendarController.selectedDay.hour;
+                      inserted.minute = _calendarController.selectedDay.minute;
+                      inserted.title = eventController.text;
+                      await helper.event_insert(inserted);
+                      print(inserted.title);
                     } else {
                       _events[_calendarController.selectedDay] = [
                         eventController.text
