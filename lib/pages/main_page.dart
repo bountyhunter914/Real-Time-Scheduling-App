@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:real_time_scheduling/navigation_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:real_time_scheduling/pages/events_page.dart';
-import 'package:real_time_scheduling/event.dart';
+import 'package:real_time_scheduling/databaseV2.dart';
 
 /// Swati's Page
-class MainPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MainPageStateful(),
-    );
-  }
-}
-
+///
+///
 class MainPageStateful extends StatefulWidget {
   @override
   State<MainPageStateful> createState() => _MainPageStatefulWidget();
 }
 
 class _MainPageStatefulWidget extends State<MainPageStateful> {
-  // int _selectedIndex = 0;
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
-
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events;
   TextEditingController eventController;
   List<dynamic> _selectedEvents;
-  DateTime _focus = DateTime.now();
+
+  bool _isOn = false;
+  void toggle() {
+    setState(() => _isOn = !_isOn);
+  }
+  // DateTime _focus = DateTime.now();
 
   @override
   void initState() {
@@ -42,26 +32,14 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
     _selectedEvents = [];
   }
 
-  Map<String, dynamic> encodeMap(Map<DateTime, dynamic> map) {
-    Map<String, dynamic> newMap = {};
-    map.forEach((key, value) {
-      newMap[key.toString()] = map[key];
-    });
-    return newMap;
-  }
-
-  Map<DateTime, dynamic> decodeMap(Map<String, dynamic> map) {
-    Map<DateTime, dynamic> newMap = {};
-    map.forEach((key, value) {
-      newMap[DateTime.parse(key)] = map[key];
-    });
-    return newMap;
-  }
-  //
-  // @override
-  // void dispose() {
-  //   _calendarController.dispose();
-  //   super.dispose();
+  // void getEventsForTheDay(date) async {
+  //   DatabaseHelper helper = DatabaseHelper.instance;
+  //   List<Map<String, dynamic>> data = await helper.queryEvents();
+  //   for (var i in data) {
+  //     if (i['Day'].toString() == date.day.toString()) {
+  //       _selectedEvents.add(i['Title']);
+  //     }
+  //   }
   // }
 
   @override
@@ -70,15 +48,80 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
       appBar: AppBar(
+        leading: Builder(builder: (BuildContext context) {
+          return IconButton(
+            icon: const Icon(Icons.error),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+          );
+        }),
         title: const Text('Welcome!'),
+        actions: [
+          Switch(
+              value: _isOn,
+              onChanged: (value) {
+                toggle();
+              })
+        ],
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
+      drawer: Drawer(
+          child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(),
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Text('Missed Events'),
+            ),
+          ),
+          ListTile(
+              title: Text("STA 301 Recitation"),
+              textColor: Colors.red,
+              focusColor: Colors.transparent,
+              onTap: () {
+                Navigator.pop(context);
+              }),
+          ListTile(
+              title: Text("CSE 442 Tuesday Meeting"),
+              textColor: Colors.red,
+              focusColor: Colors.transparent,
+              onTap: () {
+                Navigator.pop(context);
+              }),
+          ListTile(
+              title: Text("X's Birthday Party"),
+              textColor: Colors.red,
+              focusColor: Colors.transparent,
+              onTap: () {
+                Navigator.pop(context);
+              }),
+          ListTile(
+              title: Text("CSE 250 lecture"),
+              textColor: Colors.red,
+              focusColor: Colors.transparent,
+              onTap: () {
+                Navigator.pop(context);
+              }),
+          ListTile(
+            title: Text("Dinner at Y's"),
+            textColor: Colors.red,
+            focusColor: Colors.transparent,
+            onTap: () {
+              Navigator.pop(context);
+            },
+          )
+        ],
+      )),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             TableCalendar(
               events: _events,
-              initialCalendarFormat: CalendarFormat.week,
+              initialCalendarFormat: CalendarFormat.twoWeeks,
               calendarStyle: CalendarStyle(
                 highlightToday: true,
                 todayColor: Colors.grey,
@@ -105,75 +148,6 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
         child: Icon(Icons.add),
         onPressed: showAddDialog,
       ),
-
-      //   // firstDay: DateTime.utc(1910, 09, 2 4),
-      //   // lastDay: DateTime.utc(2100,09,24),
-
-      //   // calendarFormat: CalendarFormat.twoWeeks,
-
-      //   Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Expanded(
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Container(
-      //             decoration: BoxDecoration(
-      //                 color: Colors.white10,
-      //                 borderRadius: BorderRadius.circular(16)),
-      //             child: Padding(
-      //               padding: const EdgeInsets.all(16.0),
-      //               child: Column(
-      //                 children: const [
-      //                   Padding(
-      //                     padding: EdgeInsets.all(8.0),
-      //                     child: Text(
-      //                       "Today's Events",
-      //                       style: TextStyle(
-      //                           fontWeight: FontWeight.bold, fontSize: 17),
-      //                     ),
-      //                   ),
-      //                   Text("CSE 442 Demo"),
-      //                   Text("Anime Monday"),
-      //                   Text("Gym"),
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       Expanded(
-      //         child: Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Container(
-      //             decoration: BoxDecoration(
-      //                 color: Colors.white10,
-      //                 borderRadius: BorderRadius.circular(16)),
-      //             child: Padding(
-      //               padding: const EdgeInsets.all(16.0),
-      //               child: Column(
-      //                 children: const [
-      //                   Padding(
-      //                     padding: EdgeInsets.all(8.0),
-      //                     child: Text(
-      //                       "Event Invites",
-      //                       style: TextStyle(
-      //                           fontWeight: FontWeight.bold, fontSize: 17),
-      //                     ),
-      //                   ),
-      //                   Text("Max's Birthday Party"),
-      //                   Text("Checkup: Dr. Wildon"),
-      //                   Text("Family Vacation"),
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       )
-      //     ],
-      //   )
-      // ],
-
       bottomNavigationBar: NavigationBar(selectedIndex: 2),
     );
   }
@@ -187,7 +161,7 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
                 ),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text("Enter"),
+                    child: Text("Enter Event"),
                     onPressed: () {
                       if (eventController.text.isEmpty) {
                         return;
