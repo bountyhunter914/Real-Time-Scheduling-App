@@ -43,7 +43,7 @@ class NavigationBar extends StatelessWidget {
         }
         else if(index == 1){
           Navigator.push(context, PageRouteBuilder(pageBuilder: (_,__,___) =>
-          const CalendarPage(),
+              CalendarPage(),
             transitionDuration: const Duration(seconds: 0),));
         }
         else if(index == 3){

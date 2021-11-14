@@ -5,6 +5,7 @@ import 'package:real_time_scheduling/pages/settings_page.dart';
 import 'package:real_time_'
     'scheduling/pages/calendar_page.dart';
 import 'ThemeModel.dart';
+import 'package:real_time_scheduling/pages/test_events_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/main' : (context) => MainPageStateful(),
         '/events' : (context) =>  EventsPage(),
         '/settings' : (context) => SettingsPage(),
-        '/calendar' : (context) => const CalendarPage(),
+        '/calendar' : (context) => CalendarPage(),
       },
     );
   }

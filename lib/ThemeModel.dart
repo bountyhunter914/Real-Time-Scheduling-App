@@ -50,7 +50,7 @@ class ThemeModel extends ChangeNotifier{
     DatabaseHelper helper = DatabaseHelper.instance;
     List<Map<String, dynamic>>data = await helper.querySettings();
     if (data != null){
-        theme = data[0]['Theme'];
+      theme = data[0]['Theme'];
     }
   }
 
