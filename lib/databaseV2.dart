@@ -161,6 +161,22 @@ class DatabaseHelper {
     return db.query(tableSetting);
   }
 
+  input_date_to_entry(DateTime date,title) async {
+    EventEntry event = EventEntry();
+    event.month = date.month;
+    event.year = date.year;
+    event.day = date.day;
+    event.minute = date.minute;
+    event.hour = date.hour;
+    event.title = title;
+    DatabaseHelper helper = DatabaseHelper.instance;
+    await helper.event_insert(event);
+  }
+
+  Future<int >delete_event(String title) async {
+    Database db = await instance.database;
+    return await db.delete(tableName, where: '$columnEventTitle = ?', whereArgs: [title]);
+  }
   //EventInsert
   //SettingInsert
   //RemoveEvents
