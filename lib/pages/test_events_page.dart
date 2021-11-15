@@ -100,6 +100,48 @@ class _EventsMainV2State extends State<EventsMainV2> {
     );
   }
 
+   String createDate(String event, String monthNum, String day, String year, String hour, String minute){
+     List<String> months = ['January', 'February', 'March', 'April',
+       'May', 'June', 'July', 'August',
+       'September', 'October', 'November', 'December'];
+     String month = '';
+     String am_pm = '';
+     String fixHour = '';
+     if(monthNum == '1') month = months[0];
+     if(monthNum == '2') month = months[1];
+     if(monthNum == '3') month = months[2];
+     if(monthNum == '4') month = months[3];
+     if(monthNum == '5') month = months[4];
+     if(monthNum == '6') month = months[5];
+     if(monthNum == '7') month = months[6];
+     if(monthNum == '8') month = months[7];
+     if(monthNum == '9') month = months[8];
+     if(monthNum == '10') month = months[9];
+     if(monthNum == '11') month = months[10];
+     if(monthNum == '12') month = months[11];
+
+     if(hour == '12' || hour == '13' || hour == '14' || hour == '15'
+         || hour == '16' || hour == '17' || hour == '18' || hour == '19'
+          || hour == '20' || hour == '21' || hour == '22' || hour == '23'){
+       am_pm = 'pm';
+     } else am_pm = 'am';
+
+     if(hour == '13') fixHour = '1';
+     if(hour == '14') fixHour = '2';
+     if(hour == '15') fixHour = '3';
+     if(hour == '16') fixHour = '4';
+     if(hour == '17') fixHour = '5';
+     if(hour == '18') fixHour = '6';
+     if(hour == '19') fixHour = '7';
+     if(hour == '20') fixHour = '8';
+     if(hour == '21') fixHour = '9';
+     if(hour == '22') fixHour = '10';
+     if(hour == '23') fixHour = '11';
+     if(hour == '0') fixHour = '12';
+
+
+     return event + ' - ' + month + ' ' + day + ', ' + year + ' at ' + fixHour + ':' + minute + am_pm;
+   }
 
    input_date_to_entry(DateTime date) async {
     EventEntry event = EventEntry();
@@ -118,7 +160,10 @@ class _EventsMainV2State extends State<EventsMainV2> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-       if(this.events != null) for(var i in this.events) Text(i[0] + " Year: " +i[1] + " Month: " + i[2] + " Day: " + i[3] + " Time: " + i[4] + ":" + i[5])
+        //i[0] is event, 1 is year, 2 is month, 3 is day, 4 is hour, minute is 5
+       if(this.events != null) for(var i in this.events) Text(createDate(i[0], i[2], i[3], i[1], i[4], i[5]),
+                                                              style: TextStyle(color: Colors.white,
+                                                                              backgroundColor: Colors.blueAccent),)
       ],
     );
 
