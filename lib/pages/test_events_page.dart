@@ -94,11 +94,12 @@ class _EventsMainV2State extends State<EventsMainV2> {
                 }
               },
               child: Text("Submit")),
-          if(ready) showEvents(),
-        ],
-      ),
+          if(ready) showEvents()
+          ],
+      )
     );
   }
+
 
    String createDate(String event, String monthNum, String day, String year, String hour, String minute){
      List<String> months = ['January', 'February', 'March', 'April',
@@ -156,12 +157,20 @@ class _EventsMainV2State extends State<EventsMainV2> {
   }
 
   Column showEvents(){
+    int cond = 0;
+    if (events.length < 15){
+      cond = events.length;
+    }
+    else{
+      cond = 15;
+    }
     print("ShowEvents Called");
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        //listview.builder would go here ; https://api.flutter.dev/flutter/widgets/ListView-class.html
         //i[0] is event, 1 is year, 2 is month, 3 is day, 4 is hour, minute is 5
-       if(this.events != null) for(var i in this.events) Text(createDate(i[0], i[2], i[3], i[1], i[4], i[5]),
+       if(this.events != null) for(var i = 0; i < cond; ++i) Text(createDate(this.events[i][0], this.events[i][2], this.events[i][3], this.events[i][1], this.events[i][4], this.events[i][5]),
                                                               style: TextStyle(color: Colors.white,
                                                                               backgroundColor: Colors.blueAccent),)
       ],
