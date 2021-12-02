@@ -3,7 +3,8 @@ import 'package:real_time_scheduling/theme_shared_preferences.dart';
 import 'databaseV2.dart';
 
 class ThemeModel extends ChangeNotifier{
-  bool _isDark = false;
+  //bool _isDark = false;
+  bool _isDark;
   String theme;
   ThemeSharedPreferences themeSharedPreferences;
   bool get isDark => _isDark;
@@ -21,9 +22,11 @@ class ThemeModel extends ChangeNotifier{
   }
 
   set isDark(bool value){
+
     _isDark = value;
     themeSharedPreferences.setTheme(value);
     notifyListeners();
+
     if(theme == 'false'){
       if(_isDark != false){
         insertThemedb("true");
