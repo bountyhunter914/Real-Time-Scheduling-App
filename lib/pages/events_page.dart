@@ -41,7 +41,7 @@ class EventsMain extends StatelessWidget{
             padding: const EdgeInsets.all(5.0),
             child: Container(
               decoration: BoxDecoration(
-                  //color: Colors.white10,
+                //color: Colors.white10,
                   borderRadius: BorderRadius.circular(20)
               ),
             ),
@@ -136,11 +136,11 @@ class _EventAdderState extends State<EventAdder>{
                 _selectDate(context);
               },
               child: Text('Choose Date')
-            ),
+          ),
           Text("${selectedDate.month}/${selectedDate.day}/${selectedDate.year}"),
           ElevatedButton(onPressed: (){
             _selectTime(context);
-            },
+          },
               child: Text('Choose Time')
           ),
           TextField(
@@ -170,10 +170,10 @@ class _EventAdderState extends State<EventAdder>{
     final TimeOfDay time = await showTimePicker(
         context: context,
         initialTime: selectedTime);
-        if(time != null)
-          setState(() {
-            selectedTime = time;
-          });
+    if(time != null)
+      setState(() {
+        selectedTime = time;
+      });
   }
 }
 
@@ -230,14 +230,11 @@ class DropDown extends State<DropDownState>{
       //add implementation from '+' button
       items: eventNames.map<DropdownMenuItem<String>>((String value){
         return DropdownMenuItem<String>(
-          value: value,
+            value: value,
 
-          child: Text(value)
+            child: Text(value)
         );
       }).toList(),
     );
   }
 }
-
-
-

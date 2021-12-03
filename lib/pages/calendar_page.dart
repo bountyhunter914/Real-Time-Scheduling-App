@@ -18,6 +18,7 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
   TextEditingController eventController;
   List<dynamic> _selectedEvents;
   DateTime _focus = DateTime.now();
+  List<List<String>> events;
 
   @override
   void initState() {
@@ -47,6 +48,7 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
+    start();
     return Scaffold(
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
@@ -99,25 +101,15 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
             ),
             actions: <Widget>[
               FlatButton(
-                child: Text("Enter"),
+                child: Text("Enter Event"),
                 onPressed: () {
                   if (eventController.text.isEmpty) {
                     return;
                   }
-                  setState(() async {
+                  setState(() {
                     if (_events[_calendarController.selectedDay] != null) {
                       _events[_calendarController.selectedDay]
                           .add(eventController.text);
-                      DatabaseHelper helper = DatabaseHelper.instance;
-                      EventEntry inserted = new EventEntry();
-                      inserted.day = _calendarController.selectedDay.day;
-                      inserted.month = _calendarController.selectedDay.month;
-                      inserted.year = _calendarController.selectedDay.year;
-                      inserted.hour = _calendarController.selectedDay.hour;
-                      inserted.minute = _calendarController.selectedDay.minute;
-                      inserted.title = eventController.text;
-                      await helper.event_insert(inserted);
-                      print(inserted.title);
                     } else {
                       _events[_calendarController.selectedDay] = [
                         eventController.text
@@ -129,5 +121,47 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
                 },
               )
             ]));
+  }
+  List<List<String>> sortData(List<Map<String,dynamic>> data){
+    List<List<String>> sortedData = [];
+    // print("\n");
+    // print(data);
+    // print("\n");
+    for(var i in data){
+      sortedData.add([i['Title'],i['Year'].toString(), i['Month'].toString(),i['Day'].toString(), i['Hour'].toString(),i['Minute'].toString()]);
+    }
+    // print(sortedData);
+    return sortedData;
+  }
+
+  start() async{
+    DatabaseHelper helper = DatabaseHelper.instance;
+    List<Map<String,dynamic>> data = await helper.queryEvents();
+    this.events = sortData(data);
+      for(var i in this.events){
+          int month = int.parse("3");
+          List<int> info = [int.parse(i[2]),int.parse(i[3]),int.parse(i[4]),int.parse(i[5]),0,0,0];
+          // DateTime event = new DateTime(int.parse(i[1]),int.parse(i[2]),int.parse(i[3]),int.parse(i[4]),int.parse(i[5]),0,0,0);
+          // _events[DateTime.utc(int.parse(i[1]),int.parse(i[2]),int.parse(i[3]),int.parse(i[4]),int.parse(i[5]),0,0,0)] = [i[0]];
+          DateTime date = DateTime.utc(int.parse(i[1]),int.parse(i[2]),int.parse(i[3]),int.parse(i[4]),int.parse(i[5]),0,0,0);
+          setState(() {
+            if(_events[date] != null && !check(_events[date], i[0])){
+              _events[date].insert(0,i[0]);
+            }
+            else if(_events[date] == null) {
+              _events[date] = [i[0]];
+            }
+          });
+      }
+    // print(events);
+  }
+
+  bool check(List<dynamic> x, y){
+    for(var i in x){
+      if(i == y){
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -2,7 +2,7 @@
     package="com.example.real_time_scheduling">
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
    <application
-        android:label="real_time_scheduling"
+        android:label="Schedula"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

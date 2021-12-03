@@ -14,7 +14,8 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
   Map<DateTime, List<dynamic>> _events;
   TextEditingController eventController;
   List<dynamic> _selectedEvents;
-
+  List<List<String>> events;
+  bool ready = false;
   bool _isOn = false;
   void toggle() {
     setState(() => _isOn = !_isOn);
@@ -38,141 +39,156 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
   // }
   @override
   Widget build(BuildContext context) {
+    start();
     return Scaffold(
       /** Feel free to change the background color.
        * It is just to help understand which page you are on while implementing your page**/
       appBar: AppBar(
-        leading: Builder(builder: (BuildContext context) {
-          return IconButton(
-            icon: const Icon(Icons.error),
-            onPressed: () {
-              Scaffold.of(context).openDrawer();
-            },
-            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          );
-        }),
         title: const Text('Welcome!'),
-        actions: [
-          Switch(
-              value: _isOn,
-              onChanged: (value) {
-                toggle();
-              })
-        ],
       ),
       /** Implement your page in body. Just make sure you leave the NavigationBar**/
-      drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(),
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: Text('Missed Events'),
-                ),
-              ),
-              ListTile(
-                  title: Text("STA 301 Recitation"),
-                  // textColor: Colors.red,
-                  focusColor: Colors.transparent,
-                  onTap: () {
-                    Navigator.pop(context);
-                  }),
-              ListTile(
-                  title: Text("CSE 442 Tuesday Meeting"),
-                  // textColor: Colors.red,
-                  focusColor: Colors.transparent,
-                  onTap: () {
-                    Navigator.pop(context);
-                  }),
-              ListTile(
-                  title: Text("X's Birthday Party"),
-                  // textColor: Colors.red,
-                  focusColor: Colors.transparent,
-                  onTap: () {
-                    Navigator.pop(context);
-                  }),
-              ListTile(
-                  title: Text("CSE 250 lecture"),
-                  // textColor: Colors.red,
-                  focusColor: Colors.transparent,
-                  onTap: () {
-                    Navigator.pop(context);
-                  }),
-              ListTile(
-                title: Text("Dinner at Y's"),
-                // textColor: Colors.red,
-                focusColor: Colors.transparent,
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          )),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[
-            TableCalendar(
-              events: _events,
-              initialCalendarFormat: CalendarFormat.twoWeeks,
-              calendarStyle: CalendarStyle(
-                highlightToday: true,
-                todayColor: Colors.grey,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            //Today's Events
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.green
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text('  Today\'s Events  ',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),),
+                      if(ready) showEvents(),
+                    ],
+                  ),
+                ),
               ),
-              calendarController: _calendarController,
-              startingDayOfWeek: StartingDayOfWeek.monday,
-              onDaySelected: (date, events, _) {
-                setState(() {
-                  _selectedEvents = events;
-                });
-              },
             ),
-            Divider(
-              height: 20,
-              thickness: 5,
+            //Upcoming This week
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.lightBlue,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Text('Upcoming Events',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18
+                      ),),
+                      if(ready) showUpcomingEvents(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-            ..._selectedEvents.map((event) => ListTile(
-              title: Text(event),
-            )),
           ],
+
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: showAddDialog,
       ),
       bottomNavigationBar: NavigationBar(selectedIndex: 2),
     );
   }
-  showAddDialog() {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-            content: TextField(
-              controller: eventController,
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Enter Event"),
-                onPressed: () {
-                  if (eventController.text.isEmpty) {
-                    return;
-                  }
-                  setState(() {
-                    if (_events[_calendarController.selectedDay] != null) {
-                      _events[_calendarController.selectedDay]
-                          .add(eventController.text);
-                    } else {
-                      _events[_calendarController.selectedDay] = [
-                        eventController.text
-                      ];
-                    }
-                    eventController.clear();
-                    Navigator.pop(context);
-                  });
-                },
-              )
-            ]));
+
+  List<List<String>> sortData(List<Map<String,dynamic>> data){
+    List<List<String>> sortedData = [];
+    // print("\n");
+    // print(data);
+    // print("\n");
+    for(var i in data){
+      sortedData.add([i['Title'],i['Year'].toString(), i['Month'].toString(),i['Day'].toString(), i['Hour'].toString(),i['Minute'].toString()]);
+    }
+    // print(sortedData);
+    return sortedData;
   }
+
+  start() async{
+    DatabaseHelper helper = DatabaseHelper.instance;
+    List<Map<String,dynamic>> data = await helper.queryEvents();
+    this.events = sortData(data);
+    setState(() {
+      ready = true;
+    });
+    // print(events);
+  }
+
+
+  SingleChildScrollView showEvents(){
+    // print("ShowEvents Called");
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if(this.events != null) for(var i in this.events) if(DateTime.now().day.toString() == i[3] && DateTime.now().month.toString() == i[2] && DateTime.now().year.toString() == i[1])
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Center(child: Text(textDisplay(i),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold
+                    ),)),
+          )
+        ],
+      ),
+    );
+
+  }
+
+  SingleChildScrollView showUpcomingEvents(){
+    // print("ShowEvents Called");
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if(this.events != null) for(var i in this.events) if(DateTime.now().day.toString() != i[3] && DateTime.now().month.toString() != i[2] && DateTime.now().year.toString() != i[1])
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Center(child: Text(textDisplay(i),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold
+                ),)),
+            )
+        ],
+      ),
+    );
+
+  }
+
+
+
+
+  String textDisplay(List<String> i){
+    var x = i[0] + "\n"+" Date: " + i[2] + "/" + i[3]+ "/" +i[1]  + " Time: " + i[4] + ":";
+    if(i[5]== "0"){
+      x += "00";
+    }
+    else if(i[5].length == 1){
+      x += "0" + i[5];
+    }
+    else {
+      x += i[5];
+    }
+    return x;
+  }
+
+
 }
