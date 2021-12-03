@@ -4,8 +4,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatelessWidget {
   const ContactUs();
+
   //static const mail = 'mailto:sluggishschedulers@gmail.com?subject=ContactUs&body=New%20plugin';
-  static const mail = 'http://flutter.dev';
+  static const mail = 'mailto:SluggishSchedulers@gmail.com?subject=Issues with App=New%20plugin';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,25 +17,28 @@ class ContactUs extends StatelessWidget {
         ),
         /** Implement your page in body. Just make sure you leave the NavigationBar**/
         body: Center(
-        child: Column(
-          children: [
-            Text("Having any problems?", style: TextStyle(height: 5, fontSize: 25)),
-            Text("Contact us at", style: TextStyle(height: 5, fontSize: 25)),
-            Text("sluggishschedulers@gmail.com", style: TextStyle(height: 5, fontSize: 20)),
-            RaisedButton(
+          child: Column(
+            children: [
+              Text("Having any problems?",
+                  style: TextStyle(height: 5, fontSize: 25)),
+              Text("Contact us at", style: TextStyle(height: 5, fontSize: 25)),
+              Text("sluggishschedulers@gmail.com",
+                  style: TextStyle(height: 5, fontSize: 20)),
+              RaisedButton(
                 onPressed: _sendEmail,
                 child: new Text("Email Us!"),
-            ),
-          ],
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: NavigationBar(selectedIndex: 3)
     );
   }
-  _sendEmail() async{
-    if (await canLaunch(mail)){
+
+  _sendEmail() async {
+    if (await canLaunch(mail)) {
       await launch(mail);
-    }else{
+    } else {
       throw "Sorry, email could not be sent";
     }
   }

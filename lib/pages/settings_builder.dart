@@ -32,6 +32,7 @@ class _SettingsBuilderState extends State{
               children: [
                 SizedBox(height: 40),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
                       Icons.person,
@@ -42,11 +43,11 @@ class _SettingsBuilderState extends State{
                   ],
                 ),
                 Divider(height: 80, thickness: 1),
-                SizedBox(height: 15),
+                SizedBox(height: 100),
                 buildSlider("Change Theme", themeNotifier),
-                buildAccountOption(context, "Content Settings"),
-                buildAccountOption(context, "Privacy"),
-                buildAccountOption(context, "Sign Out"),
+                //buildAccountOption(context, "Content Settings"),
+                //buildAccountOption(context, "Privacy"),
+                //buildAccountOption(context, "Sign Out"),
                 buildAccountOption(context, "Contact Us"),
               ],
             ),
@@ -70,7 +71,8 @@ class _SettingsBuilderState extends State{
             child: CupertinoSwitch(
               activeColor: Colors.blue,
               trackColor: Colors.white,
-              value: themeNotifier.isDark? false: true,
+              //value: themeNotifier.isDark? false: true,
+              value: themeNotifier.isDark,
               onChanged: (value){
                 themeNotifier.isDark
                     ? themeNotifier.isDark = false

@@ -17,9 +17,11 @@ class _SettingsPageState extends State<SettingsPage>{
     return ChangeNotifierProvider(
       create: (_) => ThemeModel(),
       child: Consumer(builder: (context, ThemeModel themeModel, child){
+        var boo = themeModel.isDark;
         return MaterialApp(
           title:"Settings",
-          theme: themeModel.isDark ? ThemeData.dark() : ThemeData.light(),
+          theme: boo ? ThemeData.dark() : ThemeData.light(),
+          //theme: changeTheme(boo),
           home: SettingsBuilder(),
           routes:{
             '/contact' : (context) => const ContactUs()
@@ -27,5 +29,12 @@ class _SettingsPageState extends State<SettingsPage>{
         );
       })
     );
+  }
+  changeTheme(bool val){
+    if(val == false){
+      return ThemeData.dark();
+    }else{
+      return ThemeData.light();
+    }
   }
 }
