@@ -20,14 +20,14 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
   void toggle() {
     setState(() => _isOn = !_isOn);
   }
-  @override
-  void initState() {
-    super.initState();
-    _calendarController = CalendarController();
-    _events = {};
-    eventController = TextEditingController();
-    _selectedEvents = [];
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _calendarController = CalendarController();
+  //   _events = {};
+  //   eventController = TextEditingController();
+  //   _selectedEvents = [];
+  // }
   // void getEventsForTheDay(date) async {
   //   DatabaseHelper helper = DatabaseHelper.instance;
   //   List<Map<String, dynamic>> data = await helper.queryEvents();
@@ -39,6 +39,7 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
   // }
   @override
   Widget build(BuildContext context) {
+    start();
     start();
     return Scaffold(
       /** Feel free to change the background color.
@@ -158,13 +159,16 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if(this.events != null) for(var i in this.events) if(DateTime.now().day.toString() != i[3] && DateTime.now().month.toString() != i[2] && DateTime.now().year.toString() != i[1])
-            Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: Center(child: Text(textDisplay(i),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold
+          if(this.events != null)
+            for(var i in this.events)
+              if(DateTime.now().day.toString() != i[3])
+              // if(DateTime.now().day.toString() != i[3] && DateTime.now().month.toString() != i[2] && DateTime.now().year.toString() != i[1])
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Center(child: Text(textDisplay(i),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
                 ),)),
             )
         ],
@@ -189,6 +193,5 @@ class _MainPageStatefulWidget extends State<MainPageStateful> {
     }
     return x;
   }
-
 
 }

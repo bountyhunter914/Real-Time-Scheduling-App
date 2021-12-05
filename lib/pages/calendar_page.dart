@@ -84,10 +84,6 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
           ],
         ),
       ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: showAddDialog,
-        ),
       bottomNavigationBar: NavigationBar(selectedIndex: 1)
     );
   }
