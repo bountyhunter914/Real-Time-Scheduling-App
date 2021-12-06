@@ -13,12 +13,13 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageStatefulWidget extends State<CalendarPage> {
 
-  CalendarController _calendarController;
-  Map<DateTime, List<dynamic>> _events;
-  TextEditingController eventController;
-  List<dynamic> _selectedEvents;
+  CalendarController _calendarController = CalendarController();
+  Map<DateTime, List<dynamic>> _events= {};
+  TextEditingController eventController = TextEditingController();
+  List<dynamic> _selectedEvents = [];
   DateTime _focus = DateTime.now();
   List<List<String>> events;
+
 
   @override
   void initState() {
@@ -70,7 +71,16 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
               startingDayOfWeek: StartingDayOfWeek.monday,
               onDaySelected: (date, events, _) {
                 setState(() {
-                  _selectedEvents = events;
+                  print(_events);
+                  print(events);
+                  print(date);
+                  List<String> current_events = [];
+                  for(var i in _events.keys){
+                    if(i.day == DateTime.now().day){
+                      current_events.insert(0,_events[i][0]);
+                    }
+                  }
+                  _selectedEvents = current_events;
                 });
               },
             ),
@@ -88,36 +98,7 @@ class _CalendarPageStatefulWidget extends State<CalendarPage> {
     );
   }
 
-  showAddDialog() {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-            content: TextField(
-              controller: eventController,
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Enter Event"),
-                onPressed: () {
-                  if (eventController.text.isEmpty) {
-                    return;
-                  }
-                  setState(() {
-                    if (_events[_calendarController.selectedDay] != null) {
-                      _events[_calendarController.selectedDay]
-                          .add(eventController.text);
-                    } else {
-                      _events[_calendarController.selectedDay] = [
-                        eventController.text
-                      ];
-                    }
-                    eventController.clear();
-                    Navigator.pop(context);
-                  });
-                },
-              )
-            ]));
-  }
+
   List<List<String>> sortData(List<Map<String,dynamic>> data){
     List<List<String>> sortedData = [];
     // print("\n");
